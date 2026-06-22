@@ -34,7 +34,15 @@ const MarketOverview = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
-  const processedData = filterBy(orderBy(coins, sort), filter);
+  const processedData = filterBy(orderBy(coins, sort), filter).map((coin) => ({
+    ...coin,
+    current_price: formatCurrency(coin.current_price),
+    price_change_percentage_24h: formatPercentage(
+      coin.price_change_percentage_24h,
+    ),
+    market_cap: formatLargeNumber(coin.market_cap),
+    total_volume: formatLargeNumber(coin.total_volume),
+  }));
 
   return (
     <main>
@@ -51,47 +59,10 @@ const MarketOverview = () => {
       >
         <GridColumn field='market_cap_rank' title='Rank' width='80px' />
         <GridColumn field='name' title='Name' />
-        <GridColumn
-          field='current_price'
-          title='Price (USD)'
-          cells={{
-            data: (props) => (
-              <td>{formatCurrency(props.dataItem.current_price)}</td>
-            ),
-          }}
-        />
-        <GridColumn
-          field='price_change_percentage_24h'
-          title='24h %'
-          cells={{
-            data: (props) => {
-              const value = props.dataItem.price_change_percentage_24h;
-              return (
-                <td style={{ color: value >= 0 ? "green" : "red" }}>
-                  {formatPercentage(value)}
-                </td>
-              );
-            },
-          }}
-        />
-        <GridColumn
-          field='market_cap'
-          title='Market Cap'
-          cells={{
-            data: (props) => (
-              <td>{formatLargeNumber(props.dataItem.market_cap)}</td>
-            ),
-          }}
-        />
-        <GridColumn
-          field='total_volume'
-          title='Volume'
-          cells={{
-            data: (props) => (
-              <td>{formatLargeNumber(props.dataItem.total_volume)}</td>
-            ),
-          }}
-        />
+        <GridColumn field='current_price' title='Price (USD)' />
+        <GridColumn field='price_change_percentage_24h' title='24h %' />
+        <GridColumn field='market_cap' title='Market Cap' />
+        <GridColumn field='total_volume' title='Volume' />
       </Grid>
     </main>
   );

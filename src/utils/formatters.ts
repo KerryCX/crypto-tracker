@@ -19,5 +19,8 @@ export const formatLargeNumber = (value: number): string => {
 export const formatCurrency = (value: number): string =>
   `$${value.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
-export const formatPercentage = (value: number): string =>
-  `${value.toFixed(2)}%`;
+export const formatPercentage = (value: number | null): string => {
+  if (value === null) return "N/A";
+  const indicator = value >= 0 ? "▲" : "▼";
+  return `${indicator} ${value.toFixed(2)}%`;
+};
