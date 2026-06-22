@@ -13,6 +13,11 @@ import {
   orderBy,
 } from "@progress/kendo-data-query";
 import useMarketData from "../../hooks/useMarketData";
+import {
+  formatCurrency,
+  formatLargeNumber,
+  formatPercentage,
+} from "../../utils/formatters";
 
 const initialSort: SortDescriptor[] = [
   { field: "market_cap_rank", dir: "asc" },
@@ -46,10 +51,47 @@ const MarketOverview = () => {
       >
         <GridColumn field='market_cap_rank' title='Rank' width='80px' />
         <GridColumn field='name' title='Name' />
-        <GridColumn field='current_price' title='Price (USD)' />
-        <GridColumn field='price_change_percentage_24h' title='24h %' />
-        <GridColumn field='market_cap' title='Market Cap' />
-        <GridColumn field='total_volume' title='Volume' />
+        <GridColumn
+          field='current_price'
+          title='Price (USD)'
+          cells={{
+            data: (props) => (
+              <td>{formatCurrency(props.dataItem.current_price)}</td>
+            ),
+          }}
+        />
+        <GridColumn
+          field='price_change_percentage_24h'
+          title='24h %'
+          cells={{
+            data: (props) => {
+              const value = props.dataItem.price_change_percentage_24h;
+              return (
+                <td style={{ color: value >= 0 ? "green" : "red" }}>
+                  {formatPercentage(value)}
+                </td>
+              );
+            },
+          }}
+        />
+        <GridColumn
+          field='market_cap'
+          title='Market Cap'
+          cells={{
+            data: (props) => (
+              <td>{formatLargeNumber(props.dataItem.market_cap)}</td>
+            ),
+          }}
+        />
+        <GridColumn
+          field='total_volume'
+          title='Volume'
+          cells={{
+            data: (props) => (
+              <td>{formatLargeNumber(props.dataItem.total_volume)}</td>
+            ),
+          }}
+        />
       </Grid>
     </main>
   );
