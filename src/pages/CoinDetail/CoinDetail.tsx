@@ -1,9 +1,16 @@
 import { useParams } from "react-router-dom";
 import useCoinDetail from "../../hooks/useCoinDetail";
+import usePriceHistory from "../../hooks/usePriceHistory";
+import PriceChart from "../../components/PriceChart";
 
 const CoinDetail = () => {
   const { id } = useParams<{ id: string }>();
   const { coin, loading, error } = useCoinDetail(id ?? "");
+  const {
+    priceHistory,
+    loading: chartLoading,
+    error: chartError,
+  } = usePriceHistory(id ?? "");
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -34,6 +41,10 @@ const CoinDetail = () => {
         <dt>Volume</dt>
         <dd>${coin.market_data.total_volume.usd.toLocaleString()}</dd>
       </dl>
+      <h2>7 Day Price (USD)</h2>
+      {chartLoading && <p>Loading chart...</p>}
+      {chartError && <p>Chart unavailable</p>}
+      {priceHistory && <PriceChart priceHistory={priceHistory} />}
     </main>
   );
 };
