@@ -27,3 +27,7 @@ KendoReact Charts requires a commercial license; the Grid has a genuinely free p
 npm install
 npm run dev
 ```
+
+## License
+
+MIT — see [LICENSE](LICENSE) for details.
