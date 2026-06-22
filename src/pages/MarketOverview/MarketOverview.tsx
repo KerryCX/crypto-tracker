@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Grid,
   GridColumn,
@@ -19,6 +20,7 @@ const initialSort: SortDescriptor[] = [
 const initialFilter: CompositeFilterDescriptor = { logic: "and", filters: [] };
 
 const MarketOverview = () => {
+  const navigate = useNavigate();
   const { coins, loading, error } = useMarketData();
   const [sort, setSort] = useState<SortDescriptor[]>(initialSort);
   const [filter, setFilter] =
@@ -40,6 +42,7 @@ const MarketOverview = () => {
         filterable
         filter={filter}
         onFilterChange={(e: GridFilterChangeEvent) => setFilter(e.filter)}
+        onRowClick={(e) => navigate(`/coin/${e.dataItem.id}`)}
       >
         <GridColumn field='market_cap_rank' title='Rank' width='80px' />
         <GridColumn field='name' title='Name' />
