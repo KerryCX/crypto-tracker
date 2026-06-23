@@ -50,6 +50,7 @@ const PriceChart = ({ priceHistory }: PriceChartProps) => {
           }}
           labelStyle={{ color: "#8B949E" }}
           itemStyle={{ color: "#2DD4BF" }}
+          formatter={(value) => [`$${Number(value).toLocaleString()}`, "Price"]}
         />
         <Line
           type='monotone'
