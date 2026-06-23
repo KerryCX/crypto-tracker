@@ -71,3 +71,32 @@
 .k-icon {
   color: var(--text-secondary);
 }
+
+.k-pager {
+  background-color: var(--bg-surface);
+  border-top: 1px solid var(--bg-border);
+  color: var(--text-secondary);
+}
+
+.k-pager .k-button {
+  background-color: transparent;
+  border-color: var(--bg-border);
+  color: var(--text-secondary);
+}
+
+.k-pager .k-button:hover {
+  background-color: var(--bg-border);
+  color: var(--text-primary);
+}
+
+.k-pager .k-selected {
+  background-color: var(--accent-teal);
+  color: var(--bg-base);
+  border-color: var(--accent-teal);
+}
+
+.k-pager-sizes .k-dropdownlist {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  border-color: var(--bg-border);
+}

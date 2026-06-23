@@ -29,6 +29,8 @@ const MarketOverview = () => {
   const [filter, setFilter] =
     useState<CompositeFilterDescriptor>(initialFilter);
   const navigate = useNavigate();
+  const [skip, setSkip] = useState<number>(0);
+  const [take, setTake] = useState<number>(10);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -43,12 +45,23 @@ const MarketOverview = () => {
     total_volume: formatLargeNumber(coin.total_volume),
   }));
 
+  const pagedData = processedData.slice(skip, skip + take);
+
   return (
     <main className={styles.page}>
       <h1 className={styles.title}>Market Overview</h1>
+      <p className={styles.subtitle}>Top 50 coins by market cap</p>
       <div className={styles.card}>
         <Grid
-          data={processedData}
+          data={pagedData}
+          skip={skip}
+          take={take}
+          total={processedData.length}
+          pageable={{ pageSizes: [10, 25, 50] }}
+          onPageChange={(e) => {
+            setSkip(e.page.skip);
+            setTake(e.page.take);
+          }}
           sortable
           sort={sort}
           onSortChange={(e: GridSortChangeEvent) => setSort(e.sort)}
