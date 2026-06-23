@@ -32,4 +32,4 @@ npm run dev
 
 ## License
 
-MIT — see [LICENSE](LICENSE) for details.
+MIT: see [LICENSE](LICENSE) for details.

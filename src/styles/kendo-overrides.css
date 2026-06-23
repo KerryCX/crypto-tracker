@@ -1,0 +1,73 @@
+/* Kendo Grid dark theme overrides */
+.k-grid {
+  background-color: var(--bg-surface);
+  border: none;
+  color: var(--text-primary);
+}
+
+.k-grid-header {
+  background-color: var(--bg-surface);
+  border-bottom: 1px solid var(--bg-border);
+}
+
+.k-grid-header th {
+  background-color: var(--bg-surface);
+  color: var(--text-secondary);
+  border-color: var(--bg-border);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.k-grid td {
+  border-color: var(--bg-border);
+  color: var(--text-primary);
+}
+
+.k-grid tr {
+  background-color: var(--bg-surface);
+}
+
+.k-grid tr:hover {
+  background-color: var(--bg-border);
+  cursor: pointer;
+}
+
+.k-grid tbody tr:nth-child(even) td {
+  background-color: #1c2128;
+}
+
+.k-filtercell {
+  background-color: var(--bg-surface);
+}
+
+.k-filtercell input {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  border: 1px solid var(--bg-border);
+  border-radius: 4px;
+}
+
+.k-grid-header .k-filtercell input {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  border: 1px solid var(--bg-border);
+  border-radius: 4px;
+}
+
+.k-filtercell input::placeholder {
+  color: var(--text-secondary);
+}
+
+.k-grid tbody tr td {
+  background-color: var(--bg-surface);
+}
+
+.k-grid tbody tr:hover td {
+  background-color: var(--bg-border);
+  cursor: pointer;
+}
+
+.k-icon {
+  color: var(--text-secondary);
+}

@@ -1,9 +1,36 @@
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+:root {
+  /* Backgrounds */
+  --bg-base: #0d1117;
+  --bg-surface: #161b22;
+  --bg-border: #21262d;
+
+  /* Text */
+  --text-primary: #f0f6fc;
+  --text-secondary: #8b949e;
+
+  /* Accent */
+  --accent-teal: #2dd4bf;
+  --accent-teal-hover: #14b8a6;
+
+  /* Semantic */
+  --semantic-positive: #3fb950;
+  --semantic-negative: #f85149;
+
+  /* Typography */
+  --font-sans: Inter, system-ui, sans-serif;
+}
+
 body {
-  font-family: sans-serif;
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  min-height: 100vh;
 }

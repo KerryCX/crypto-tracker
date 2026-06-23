@@ -26,7 +26,7 @@ const PriceChart = ({ priceHistory }: PriceChartProps) => {
     <ResponsiveContainer width='100%' height={300}>
       <LineChart data={chartData}>
         <CartesianGrid strokeDasharray='3 3' />
-        {/* interval={23} shows one label per day — hourly data over 7 days ≈ 168 points, so every 24th label */}
+        {/* interval={23} shows one label per day, hourly data over 7 days ≈ 168 points, so every 24th label */}
         <XAxis dataKey='time' interval={23} />
         {/* domain auto fits the scale to the actual price range rather than starting at zero */}
         <YAxis domain={["auto", "auto"]} />
