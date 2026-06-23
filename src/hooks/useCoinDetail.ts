@@ -16,14 +16,7 @@ const useCoinDetail = (id: string): UseCoinDetailResult => {
     const fetchCoin = async (): Promise<void> => {
       try {
         // Exclude localisation, tickers, community and developer data to reduce response size
-        const response = await fetch(
-          `https://api.coingecko.com/api/v3/coins/${id}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false`,
-          {
-            headers: {
-              "x-cg-demo-api-key": import.meta.env.VITE_COINGECKO_API_KEY,
-            },
-          },
-        );
+        const response = await fetch(`/api/coin/${id}`);
         if (!response.ok) {
           const message =
             response.status === 429

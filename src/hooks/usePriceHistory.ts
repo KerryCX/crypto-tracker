@@ -15,15 +15,8 @@ const usePriceHistory = (id: string): UsePriceHistoryResult => {
   useEffect(() => {
     const fetchPriceHistory = async (): Promise<void> => {
       try {
-        const response = await fetch(
-          // 7 days of hourly price data in USD
-          `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=7`,
-          {
-            headers: {
-              "x-cg-demo-api-key": import.meta.env.VITE_COINGECKO_API_KEY,
-            },
-          },
-        );
+        // 7 days of hourly price data in USD
+        const response = await fetch(`/api/price-history/${id}`);
         if (!response.ok) {
           const message =
             response.status === 429
