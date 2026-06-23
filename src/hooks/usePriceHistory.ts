@@ -18,6 +18,11 @@ const usePriceHistory = (id: string): UsePriceHistoryResult => {
         const response = await fetch(
           // 7 days of hourly price data in USD
           `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=7`,
+          {
+            headers: {
+              "x-cg-demo-api-key": import.meta.env.VITE_COINGECKO_API_KEY,
+            },
+          },
         );
         if (!response.ok) {
           const message =

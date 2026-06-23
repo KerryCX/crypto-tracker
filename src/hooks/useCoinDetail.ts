@@ -18,6 +18,11 @@ const useCoinDetail = (id: string): UseCoinDetailResult => {
         // Exclude localisation, tickers, community and developer data to reduce response size
         const response = await fetch(
           `https://api.coingecko.com/api/v3/coins/${id}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false`,
+          {
+            headers: {
+              "x-cg-demo-api-key": import.meta.env.VITE_COINGECKO_API_KEY,
+            },
+          },
         );
         if (!response.ok) {
           const message =
