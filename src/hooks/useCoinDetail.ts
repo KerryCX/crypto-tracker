@@ -29,7 +29,13 @@ const useCoinDetail = (id: string): UseCoinDetailResult => {
         const data: CoinDetail = await response.json();
         setCoin(data);
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Something went wrong");
+        const message =
+          err instanceof Error && err.message === "Failed to fetch"
+            ? "Unable to reach the market data service — please try again shortly"
+            : err instanceof Error
+              ? err.message
+              : "Something went wrong";
+        setError(message);
       } finally {
         setLoading(false);
       }
