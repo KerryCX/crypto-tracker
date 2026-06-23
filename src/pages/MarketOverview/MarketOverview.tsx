@@ -33,7 +33,7 @@ const MarketOverview = () => {
   const [take, setTake] = useState<number>(10);
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+  if (error) return <p className={styles.error}>{error}</p>;
 
   const processedData = filterBy(orderBy(coins, sort), filter).map((coin) => ({
     ...coin,

@@ -21,7 +21,7 @@ const CoinDetail = () => {
   } = usePriceHistory(id ?? "");
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+  if (error) return <p className={styles.error}>{error}</p>;
   if (!coin) return <p>Coin not found</p>;
 
   const change = coin.market_data.price_change_percentage_24h;

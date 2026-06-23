@@ -103,3 +103,9 @@
   border: none;
   cursor: pointer;
 }
+
+.error {
+  padding: 32px;
+  color: var(--semantic-negative);
+  font-size: 14px;
+}

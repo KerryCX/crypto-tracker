@@ -21,3 +21,9 @@
   color: var(--text-secondary);
   margin-bottom: 16px;
 }
+
+.error {
+  padding: 32px;
+  color: var(--semantic-negative);
+  font-size: 14px;
+}
