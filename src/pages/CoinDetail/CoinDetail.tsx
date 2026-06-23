@@ -1,16 +1,18 @@
 import { useParams, useNavigate } from "react-router-dom";
 import useCoinDetail from "../../hooks/useCoinDetail";
 import usePriceHistory from "../../hooks/usePriceHistory";
-import PriceChart from "../../components/PriceChart";
+
 import {
   formatCurrency,
   formatLargeNumber,
   formatPercentage,
 } from "../../utils/formatters";
+import styles from "./CoinDetail.module.css";
+import PriceChart from "../../components/PriceChart";
 
 const CoinDetail = () => {
-  const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const { coin, loading, error } = useCoinDetail(id ?? "");
   const {
     priceHistory,
@@ -22,44 +24,68 @@ const CoinDetail = () => {
   if (error) return <p>Error: {error}</p>;
   if (!coin) return <p>Coin not found</p>;
 
+  const change = coin.market_data.price_change_percentage_24h;
+  const changeClass =
+    change >= 0 ? styles.statValuePositive : styles.statValueNegative;
+
   return (
-    <main>
-      <button onClick={() => navigate("/")}>← Back to market</button>
-      <img src={coin.image.large} alt={coin.name} width={64} height={64} />
-      <h1>
-        {coin.name} <span>({coin.symbol.toUpperCase()})</span>
-      </h1>
-      <dl>
-        <dt>Price</dt>
-        <dd>{formatCurrency(coin.market_data.current_price.usd)}</dd>
+    <main className={styles.page}>
+      <button className={styles.backLink} onClick={() => navigate("/")}>
+        ← Back to market
+      </button>
 
-        <dt>24h Change</dt>
-        <dd
-          style={{
-            color:
-              coin.market_data.price_change_percentage_24h >= 0
-                ? "green"
-                : "red",
-          }}
-        >
-          {formatPercentage(coin.market_data.price_change_percentage_24h)}
-        </dd>
-        <dt>Market Cap</dt>
-        <dd>{formatLargeNumber(coin.market_data.market_cap.usd)}</dd>
+      <div className={styles.coinHeader}>
+        <img
+          className={styles.coinLogo}
+          src={coin.image.large}
+          alt={coin.name}
+        />
+        <div>
+          <div className={styles.coinName}>{coin.name}</div>
+          <div className={styles.coinSymbol}>{coin.symbol.toUpperCase()}</div>
+        </div>
+        <div className={styles.coinPrice}>
+          {formatCurrency(coin.market_data.current_price.usd)}
+        </div>
+      </div>
 
-        <dt>24h High</dt>
-        <dd>{formatCurrency(coin.market_data.high_24h.usd)}</dd>
+      <div className={styles.statsRow}>
+        <div className={styles.statCard}>
+          <div className={styles.statLabel}>Market Cap</div>
+          <div className={styles.statValue}>
+            {formatLargeNumber(coin.market_data.market_cap.usd)}
+          </div>
+        </div>
+        <div className={styles.statCard}>
+          <div className={styles.statLabel}>24h High</div>
+          <div className={styles.statValue}>
+            {formatCurrency(coin.market_data.high_24h.usd)}
+          </div>
+        </div>
+        <div className={styles.statCard}>
+          <div className={styles.statLabel}>24h Low</div>
+          <div className={styles.statValue}>
+            {formatCurrency(coin.market_data.low_24h.usd)}
+          </div>
+        </div>
+        <div className={styles.statCard}>
+          <div className={styles.statLabel}>Volume</div>
+          <div className={styles.statValue}>
+            {formatLargeNumber(coin.market_data.total_volume.usd)}
+          </div>
+        </div>
+        <div className={styles.statCard}>
+          <div className={styles.statLabel}>24h Change</div>
+          <div className={changeClass}>{formatPercentage(change)}</div>
+        </div>
+      </div>
 
-        <dt>24h Low</dt>
-        <dd>{formatCurrency(coin.market_data.low_24h.usd)}</dd>
-
-        <dt>Volume</dt>
-        <dd>{formatLargeNumber(coin.market_data.total_volume.usd)}</dd>
-      </dl>
-      <h2>7 Day Price (USD)</h2>
-      {chartLoading && <p>Loading chart...</p>}
-      {chartError && <p>Chart unavailable</p>}
-      {priceHistory && <PriceChart priceHistory={priceHistory} />}
+      <div className={styles.chartCard}>
+        <h2 className={styles.chartTitle}>7 Day Price (USD)</h2>
+        {chartLoading && <p>Loading chart...</p>}
+        {chartError && <p>Chart unavailable</p>}
+        {priceHistory && <PriceChart priceHistory={priceHistory} />}
+      </div>
     </main>
   );
 };

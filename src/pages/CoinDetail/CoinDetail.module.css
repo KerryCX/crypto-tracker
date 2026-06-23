@@ -1,0 +1,105 @@
+.page {
+  padding: 32px;
+}
+
+.backLink {
+  display: inline-block;
+  color: var(--text-secondary);
+  font-size: 14px;
+  text-decoration: none;
+  margin-bottom: 24px;
+}
+
+.backLink:hover {
+  color: var(--text-primary);
+}
+
+.coinHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  max-width: 600px;
+}
+
+.coinLogo {
+  width: 48px;
+  height: 48px;
+}
+
+.coinName {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.coinSymbol {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.coinPrice {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--accent-teal);
+  margin-left: auto;
+}
+
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.statCard {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--bg-border);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.statLabel {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.statValue {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.statValuePositive {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--semantic-positive);
+}
+
+.statValueNegative {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--semantic-negative);
+}
+
+.chartCard {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--bg-border);
+  border-radius: 8px;
+  padding: 24px;
+}
+
+.chartTitle {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+
+.backLink {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
