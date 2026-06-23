@@ -19,7 +19,13 @@ const useCoinDetail = (id: string): UseCoinDetailResult => {
         const response = await fetch(
           `https://api.coingecko.com/api/v3/coins/${id}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false`,
         );
-        if (!response.ok) throw new Error(`API error: ${response.status}`);
+        if (!response.ok) {
+          const message =
+            response.status === 429
+              ? "Too many requests — please wait a moment and refresh"
+              : `Something went wrong (${response.status})`;
+          throw new Error(message);
+        }
         const data: CoinDetail = await response.json();
         setCoin(data);
       } catch (err) {

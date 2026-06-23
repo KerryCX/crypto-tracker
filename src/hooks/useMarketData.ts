@@ -18,7 +18,13 @@ const useMarketData = (): UseMarketDataResult => {
         const response = await fetch(
           "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1",
         );
-        if (!response.ok) throw new Error(`API error: ${response.status}`);
+        if (!response.ok) {
+          const message =
+            response.status === 429
+              ? "Too many requests — please wait a moment and refresh"
+              : `Something went wrong (${response.status})`;
+          throw new Error(message);
+        }
         const data: Coin[] = await response.json();
         setCoins(data);
       } catch (err) {

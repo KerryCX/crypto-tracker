@@ -19,7 +19,13 @@ const usePriceHistory = (id: string): UsePriceHistoryResult => {
           // 7 days of hourly price data in USD
           `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=7`,
         );
-        if (!response.ok) throw new Error(`API error: ${response.status}`);
+        if (!response.ok) {
+          const message =
+            response.status === 429
+              ? "Too many requests — please wait a moment and refresh"
+              : `Something went wrong (${response.status})`;
+          throw new Error(message);
+        }
         const data: PriceHistory = await response.json();
         setPriceHistory(data);
       } catch (err) {
