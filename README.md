@@ -30,3 +30,17 @@ You'll need a free CoinGecko Demo API key to run this locally:
 1. Sign up at [coingecko.com](https://www.coingecko.com) and go to the Developer Dashboard
 2. Create a Demo API key (free, no credit card required)
 3. Create a `.env.local` file in the project root:
+4. Install dependencies:
+
+```bash
+npm install
+npm install -g netlify-cli
+```
+
+5. Run the dev server:
+
+```bash
+netlify dev
+```
+
+The app runs on `http://localhost:8888`.

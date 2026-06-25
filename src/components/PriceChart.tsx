@@ -16,24 +16,25 @@ interface PriceChartProps {
 
 const PriceChart = ({ priceHistory }: PriceChartProps) => {
   const chartData = priceHistory.prices.map(([timestamp, price]) => ({
-    time: new Date(timestamp).toLocaleDateString("en-GB", {
+    time: new Date(timestamp).toLocaleString("en-GB", {
       month: "short",
       day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
     }),
     price: Math.round(price * 100) / 100,
   }));
 
   return (
     <ResponsiveContainer width='100%' height={300}>
-      <LineChart data={chartData}>
+      <LineChart data={chartData} margin={{ left: 10, right: 20 }}>
         <CartesianGrid strokeDasharray='3 3' stroke={CHART_COLORS.grid} />
-        {/* interval={23} shows one label per day — hourly data over 7 days ≈ 168 points */}
         <XAxis
           dataKey='time'
-          interval={23}
           tick={{ fill: CHART_COLORS.axis, fontSize: 12 }}
           axisLine={{ stroke: CHART_COLORS.grid }}
           tickLine={false}
+          tickFormatter={(value, index) => (index % 24 === 0 ? value : "")}
         />
         {/* domain auto fits the scale to the actual price range rather than starting at zero */}
         <YAxis
