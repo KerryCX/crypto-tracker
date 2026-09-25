@@ -1,0 +1,32 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    target-branch: "dev"
+    groups:
+      react:
+        patterns:
+          - "react"
+          - "react-dom"
+          - "@types/react"
+          - "@types/react-dom"
+      typescript:
+        patterns:
+          - "typescript"
+      vite:
+        patterns:
+          - "vite"
+          - "@vitejs/*"
+      vitest:
+        patterns:
+          - "vitest"
+          - "@vitest/*"
+      testing:
+        patterns:
+          - "@testing-library/*"
+      eslint:
+        patterns:
+          - "eslint"
+          - "@eslint/*"
