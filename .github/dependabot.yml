@@ -12,6 +12,12 @@ updates:
           - "react-dom"
           - "@types/react"
           - "@types/react-dom"
+      kendo:
+        patterns:
+          - "@progress/*"
+      recharts:
+        patterns:
+          - "recharts"
       typescript:
         patterns:
           - "typescript"
