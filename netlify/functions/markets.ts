@@ -1,6 +1,7 @@
-import type { Context } from "@netlify/functions";
+// Loads the global Netlify types used by Netlify.env
+import type {} from "@netlify/functions";
 
-export default async (req: Request, context: Context) => {
+export default async () => {
   const apiKey = Netlify.env.get("COINGECKO_API_KEY") ?? "";
 
   const response = await fetch(
